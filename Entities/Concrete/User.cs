@@ -10,10 +10,14 @@ namespace Entities.Concrete
     class User : IEntity
     {
         public int Id { get; set; }
-        public String Name { get; set; }
-        public String Surname{ get; set; }
-        public DateTime BirthDate { get; set; }
-        public String BloodType { get; set; }
+        public int BloodTypeId { get; set; } //Kan grubunun id'si
+        public string Name { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public bool IsValidate { get; set; }
+        public bool IsMernisOk { get; set; }
+
 
     }
 }
