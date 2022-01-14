@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    class User : IEntity
+    public class User : IEntity
     {
         public int Id { get; set; }
         public int BloodTypeId { get; set; } //Kan grubunun id'si

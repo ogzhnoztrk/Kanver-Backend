@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    class BloodType : IEntity
+    public class BloodType : IEntity
     {
         public int BloodTypeId { get;}
         public string BloodTypes { get;}
