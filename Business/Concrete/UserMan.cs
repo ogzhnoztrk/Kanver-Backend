@@ -1,16 +1,14 @@
-﻿using Business.Abstract;
+﻿using System.Collections.Generic;
+using Business.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Conctrete;
 using Entities.Concrete;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Business.Concrete
 {
     public class UserMan : IUserService
     {
-        public IUserDal _userDal;
+        private IUserDal _userDal;
 
         public UserMan(IUserDal userDal)
         {
@@ -36,9 +34,9 @@ namespace Business.Concrete
             return new SuccessResult("Silindi");
         }
 
-        public IDataResult<List<User>> GetList()
+        public IDataResult<List<User>> GetAll()
         {
-            return new SuccessDataResult<List<User>>(_userDal.GetList().ToList());
+            return new SuccessDataResult<List<User>>(_userDal.GetAll(), "Getirildi");
         }
     }
 }

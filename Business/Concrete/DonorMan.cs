@@ -1,4 +1,5 @@
-﻿using Business.Abstract;
+﻿using System.Collections.Generic;
+using Business.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -31,5 +32,18 @@ namespace Business.Concrete
             _donorDal.Delete(donor);
             return new SuccessResult("Donor Silindi");
         }
+
+        public IDataResult<List<Donor>> GetAll()
+        {
+            return new SuccessDataResult<List<Donor>>(_donorDal.GetAll(), "DataGetirildi");
+        }
+
+        public IDataResult<List<Donor>> GetAllByFilter(int userId)
+        {
+            var result = _donorDal.GetAllByFilter(d => d.UserId == userId);
+            return new SuccessDataResult<List<Donor>>(result, "Data Getirildi");
+        }
+
+     
     }
 }

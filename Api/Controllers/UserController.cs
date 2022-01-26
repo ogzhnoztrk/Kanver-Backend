@@ -1,9 +1,8 @@
-﻿using Business.Abstract;
+﻿using System.Collections.Generic;
+using Business.Abstract;
 using Core.Utilities.Results;
 using Entities.Concrete;
-
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace Api.Controllers
 {
@@ -11,27 +10,18 @@ namespace Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private IUserService _userService;
+        private readonly IUserService _userService;
 
         public UserController(IUserService userService)
         {
             _userService = userService;
         }
 
-        [HttpPost("/postUser")] 
+        [HttpPost("/postUser")]
         public IResult Post(User user)
         {
-            //_userService.Add(user);
             return _userService.Add(user);
-           
         }
-        //  [HttpPost("/PostUser")]
-        //public ActionResult Post(User user)
-        //{
-        //    _userService.Add(user);
-        //     var result = _userService.Add(user);
-        //    return !result.Success ? BadRequest(result) : Ok(result);
-        //}
 
         [HttpPut("/updateUser")]
         public IResult Update(User user)
@@ -45,16 +35,10 @@ namespace Api.Controllers
             return _userService.Delete(user);
         }
 
-       
-        [HttpGet("/getAll")]
-        public IDataResult<User> GetList()
+        [HttpGet("/getAllUser")]
+        public IDataResult<List<User>> GetAll()
         {
-
-            return (IDataResult<User>)_userService.GetList();      
-        
+            return _userService.GetAll();
         }
-
-
-
     }
 }

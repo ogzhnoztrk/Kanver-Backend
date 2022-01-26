@@ -1,18 +1,24 @@
-﻿using Business.Abstract;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Business.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
 namespace Business.Concrete
 {
-    public class ComplaintMan : IComplaint
+    public class ComplaintMan : IComplaintService
     {
-        private readonly IComplaintDal _complaintDal;
+        private IComplaintDal _complaintDal;
 
         public ComplaintMan(IComplaintDal complaintDal)
         {
             _complaintDal = complaintDal;
         }
+
 
         public IResult Add(Complaint complaint)
         {
@@ -24,6 +30,11 @@ namespace Business.Concrete
         {
             _complaintDal.Delete(complaint);
             return new SuccessResult("Silindi");
+        }
+
+        public IDataResult<List<Complaint>> GetAll()
+        {
+            return new SuccessDataResult<List<Complaint>>(_complaintDal.GetAll(), "Data Getirildi");
         }
     }
 }
