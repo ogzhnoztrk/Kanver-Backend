@@ -15,5 +15,6 @@ namespace Core.DataAccess.Abstract
         void Add(T entity);
         void Update(T entity);
         void Delete(T entity);
+        IList<T> GetList(Expression<Func<T, bool>> filter = null);
     }
 }

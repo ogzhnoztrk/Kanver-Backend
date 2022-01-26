@@ -35,5 +35,10 @@ namespace Business.Concrete
             _userDal.Delete(user);
             return new SuccessResult("Silindi");
         }
+
+        public IDataResult<List<User>> GetList()
+        {
+            return new SuccessDataResult<List<User>>(_userDal.GetList().ToList());
+        }
     }
 }

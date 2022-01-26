@@ -1,6 +1,4 @@
-﻿
-
-using Core.Utilities.Results;
+﻿using Core.Utilities.Results;
 using Entities.Concrete;
 using System.Collections.Generic;
 
@@ -11,5 +9,6 @@ namespace Business.Abstract
         IResult Add(User user);
         IResult Update(User user);
         IResult Delete(User user);
+        IDataResult<List<User>> GetList();
     }
 }

@@ -11,14 +11,14 @@ namespace Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        IUserService _userService;
+        private IUserService _userService;
 
         public UserController(IUserService userService)
         {
             _userService = userService;
         }
 
-        [HttpPost("/PostUser")] 
+        [HttpPost("/postUser")] 
         public IResult Post(User user)
         {
             //_userService.Add(user);
@@ -45,11 +45,13 @@ namespace Api.Controllers
             return _userService.Delete(user);
         }
 
+       
         [HttpGet("/getAll")]
-        public IDataResult<List<User>> GetAll()
+        public IDataResult<User> GetList()
         {
-            
-            return _userService.GetList();
+
+            return (IDataResult<User>)_userService.GetList();      
+        
         }
 
 

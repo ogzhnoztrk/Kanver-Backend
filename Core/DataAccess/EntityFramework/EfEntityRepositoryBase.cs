@@ -1,5 +1,4 @@
-﻿
-using Core.DataAccess.Abstract;
+﻿using Core.DataAccess.Abstract;
 using Entities.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -41,6 +40,7 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
+       
 
         public void Update(TEntity entity)
         {
@@ -49,6 +49,20 @@ namespace Core.DataAccess.EntityFramework
                 var updatedEntity = context.Entry(entity);
                 updatedEntity.State = EntityState.Modified;
                 context.SaveChanges();
+            }
+        }
+        public IList<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
+        {
+            using (var context = new TContext())
+            {
+                if (filter == null)
+                {
+                    return context.Set<TEntity>().ToList();
+                }
+                else
+                {
+                    return context.Set<TEntity>().Where(filter).ToList();
+                }
             }
         }
     }
