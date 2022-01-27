@@ -1,4 +1,6 @@
 using Business.Abstract;
+using Business.Adapters.Abstract;
+using Business.Adapters.Concrete;
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Conctrete;
@@ -44,6 +46,9 @@ namespace Api
             //ANNOUCEMENT
             services.AddSingleton<IAnnouncementDal, EfAnnouncementDal>();
             services.AddSingleton<IAnnouncementService, AnnouncementMan>();
+
+            //Service
+            services.AddSingleton(typeof(IMernisServiceAdapter), typeof(MernisServiceAdapter));
 
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Api", Version = "v1"}); });
         }

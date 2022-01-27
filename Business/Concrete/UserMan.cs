@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Business.Abstract;
+using Business.Adapters.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -8,18 +9,25 @@ namespace Business.Concrete
 {
     public class UserMan : IUserService
     {
+        private IMernisServiceAdapter _mernisServiceAdapter;
         private IUserDal _userDal;
 
-        public UserMan(IUserDal userDal)
+        public UserMan(IUserDal userDal, IMernisServiceAdapter mernisServiceAdapter)
         {
             _userDal = userDal;
+            _mernisServiceAdapter = mernisServiceAdapter;
         }
 
 
         public IResult Add(User user)
         {
-            _userDal.Add(user);
-            return new SuccessResult("Eklendi");
+            if (_mernisServiceAdapter.VerifyCid(user).Result)
+            {
+                _userDal.Add(user);
+                return new SuccessResult("Eklendi");
+            }
+           
+            return new ErrorResult("Kullanıcı Eklenemedi Lütfen Değerleri kontrol Ediniz");
         }
 
         public IResult Update(User user)

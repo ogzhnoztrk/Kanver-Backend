@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Business.Adapters.Concrete;
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Conctrete;
 using Entities.Concrete;
+
 
 namespace ConsoleUI
 {
@@ -12,15 +14,29 @@ namespace ConsoleUI
     {
         private static void Main(string[] args)
         {
-            EfComplaintDal complaintDal = new EfComplaintDal();
-            ComplaintMan complaintMan = new ComplaintMan(complaintDal);
 
 
-            Complaint complaint = new Complaint();
-            complaint.ComplaintContent = "asdasdas";
-            
-            complaintMan.Add(complaint);
+            // User user = new User()
+            // {
+            //     IdentityNumber = "47018041374",
+            //     Name = "Oğuzhan",
+            //     LastName = "Öztürk",
+            //     BirthDay = new DateTime(2000,10,04)
+            // };
+            //
+            // MernisServiceAdapter adapter = new MernisServiceAdapter();
+            //
+            // Console.WriteLine(adapter.VerifyCid(user).Result);
 
+            //if (adapter.isRealPerson(user))
+            //{
+            //    Console.WriteLine("true");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("False");
+            //
+            //}
         }
     }
 }
