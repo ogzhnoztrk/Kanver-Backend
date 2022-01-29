@@ -40,5 +40,11 @@ namespace Api.Controllers
         {
             return _userService.GetAll();
         }
+
+        [HttpGet("/Login")]
+        public IResult Login(string mail, string password)
+        {
+            return _userService.Login(mail, password);
+        }
     }
 }

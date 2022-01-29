@@ -10,6 +10,6 @@ namespace Business.Abstract
         IResult Update(User user);
         IResult Delete(User user);
         IDataResult<List<User>> GetAll();
-
+        IResult Login(string mail, string password);
     }
 }

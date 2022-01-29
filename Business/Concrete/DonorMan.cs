@@ -17,8 +17,16 @@ namespace Business.Concrete
 
         public IResult Add(Donor donor)
         {
-            _donorDal.Add(donor);
-            return new SuccessResult("Donor Eklendi");
+            if (donor.AlcholStatus && donor.DiseaseStatus && donor.DrugStatus && donor.MedicationStatus)
+            {
+                _donorDal.Add(donor);
+                return new SuccessResult("Donor Eklendi");
+            }
+            else
+            {
+                return new ErrorResult(message: "Kullanıcının Değerleri Donor Olmayı Karşılamıyor");
+            }
+            
         }
 
         public IResult Update(Donor donor)

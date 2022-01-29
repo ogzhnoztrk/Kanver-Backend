@@ -9,8 +9,8 @@ namespace Business.Concrete
 {
     public class UserMan : IUserService
     {
-        private IMernisServiceAdapter _mernisServiceAdapter;
-        private IUserDal _userDal;
+        private readonly IMernisServiceAdapter _mernisServiceAdapter;
+        private readonly IUserDal _userDal;
 
         public UserMan(IUserDal userDal, IMernisServiceAdapter mernisServiceAdapter)
         {
@@ -21,12 +21,14 @@ namespace Business.Concrete
 
         public IResult Add(User user)
         {
-            if (_mernisServiceAdapter.VerifyCid(user).Result)
+
+            if (_mernisServiceAdapter.VerifyCid(user).Result) //
             {
+                user.IsMernisOk = true;
                 _userDal.Add(user);
                 return new SuccessResult("Eklendi");
             }
-           
+
             return new ErrorResult("Kullanıcı Eklenemedi Lütfen Değerleri kontrol Ediniz");
         }
 
@@ -46,5 +48,20 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<User>>(_userDal.GetAll(), "Getirildi");
         }
+
+        public IResult Login(string mail, string password)
+        {
+            var result = _userDal.Get(user => user.Email == mail);
+
+            if (result == null)
+                return new Result(false, "giriş başarısız");
+            if (result.Password.Equals(password)) return new Result(true, "giriş başarılı");
+            {
+                return new Result(false, "giriş başarısız");
+            }
+        }
+
+
+       
     }
 }
