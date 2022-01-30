@@ -39,6 +39,10 @@ namespace Api
             services.AddSingleton<IComplaintDal, EfComplaintDal>();
             services.AddSingleton<IComplaintService, ComplaintMan>();
 
+            //FAQ
+            services.AddSingleton<IFaqDal, EfFaqDal>();
+            services.AddSingleton<IFaqService, FaqMan>();
+
             //DONOR
             services.AddSingleton<IDonorDal, EfDonorDal>();
             services.AddSingleton<IDonorService, DonorMan>();

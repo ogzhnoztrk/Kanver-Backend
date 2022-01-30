@@ -20,5 +20,6 @@ namespace DataAccess.Conctrete
         public DbSet<Donor> Donors { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
+        public DbSet<Faq> Faq { get; set; }
     }
 }
