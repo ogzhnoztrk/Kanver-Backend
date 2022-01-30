@@ -21,7 +21,7 @@ namespace Api.Controllers
             _donorService = donorService;
         }
         
-        [HttpPost("/addDonor")]
+        [HttpPost("/postDonor")]
         public IResult Add(Donor donor)
         {
             return _donorService.Add(donor);

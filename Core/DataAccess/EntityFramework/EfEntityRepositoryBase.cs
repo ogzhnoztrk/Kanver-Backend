@@ -31,6 +31,14 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
+        // public void DeleteById(int id)
+        // {
+        //     using (TContext context = new TContext())
+        //     {
+        //         
+        //     }
+        // }
+
         public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
         {
             using (TContext context = new TContext())

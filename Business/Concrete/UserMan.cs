@@ -21,15 +21,19 @@ namespace Business.Concrete
 
         public IResult Add(User user)
         {
-
+            
             if (_mernisServiceAdapter.VerifyCid(user).Result) //
             {
                 user.IsMernisOk = true;
                 _userDal.Add(user);
-                return new SuccessResult("Eklendi");
+                return new Result(true, "Eklendi");
+            }
+            else
+            {
+                return new ErrorResult("Kullanıcı Eklenemedi Lütfen Değerleri kontrol Ediniz");
             }
 
-            return new ErrorResult("Kullanıcı Eklenemedi Lütfen Değerleri kontrol Ediniz");
+            
         }
 
         public IResult Update(User user)
@@ -38,9 +42,12 @@ namespace Business.Concrete
             return new SuccessResult("Güncellendi");
         }
 
-        public IResult Delete(User user)
+        public IResult Delete(int userId)
         {
-            _userDal.Delete(user);
+
+            var result = _userDal.Get(user => user.UserId == userId);
+            _userDal.Delete(result);
+            
             return new SuccessResult("Silindi");
         }
 

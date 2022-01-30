@@ -8,7 +8,7 @@ namespace Business.Abstract
     {
         IResult Add(User user);
         IResult Update(User user);
-        IResult Delete(User user);
+        IResult Delete(int userId);
         IDataResult<List<User>> GetAll();
         IResult Login(string mail, string password);
     }

@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Business.Abstract;
 using Core.Utilities.Results;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Api.Controllers
 {
@@ -17,22 +20,23 @@ namespace Api.Controllers
             _userService = userService;
         }
 
+        
         [HttpPost("/postUser")]
-        public IResult Post(User user)
+        public IResult Post([FromBody]User user)
         {
             return _userService.Add(user);
         }
 
         [HttpPut("/updateUser")]
-        public IResult Update(User user)
+        public IResult Update([FromBody] User user)
         {
             return _userService.Update(user);
         }
 
         [HttpDelete("/deleteUser")]
-        public IResult Delete(User user)
+        public IResult Delete(int userId)
         {
-            return _userService.Delete(user);
+            return _userService.Delete(userId);
         }
 
         [HttpGet("/getAllUser")]
