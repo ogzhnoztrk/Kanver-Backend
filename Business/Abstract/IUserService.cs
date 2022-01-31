@@ -12,5 +12,7 @@ namespace Business.Abstract
         IDataResult<List<User>> GetAll();
         IResult Login(string mail, string password);
         IResult GetUserByEmail(string email);
+
+        IResult GetUserById(int id);
     }
 }

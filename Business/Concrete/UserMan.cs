@@ -82,6 +82,12 @@ namespace Business.Concrete
 
         }
 
+        public IResult GetUserById(int id)
+        {
+            var result = _userDal.Get(user => id == user.UserId);
+            return new DataResult<User>(result, true,"data geldi");
+        }
+
         private bool isMailExist(string mail)
         {
             var result = _userDal.Get(user => mail == user.Email);
