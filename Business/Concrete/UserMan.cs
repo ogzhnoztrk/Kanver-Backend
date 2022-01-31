@@ -21,19 +21,17 @@ namespace Business.Concrete
 
         public IResult Add(User user)
         {
-            
-            if (_mernisServiceAdapter.VerifyCid(user).Result) //
+            //Mernis kontrolu sağlanır
+            if (_mernisServiceAdapter.VerifyCid(user).Result && isMailExist(user.Email)) //
             {
                 user.IsMernisOk = true;
                 _userDal.Add(user);
+
                 return new Result(true, "Eklendi");
             }
-            else
-            {
-                return new ErrorResult("Kullanıcı Eklenemedi Lütfen Değerleri kontrol Ediniz");
-            }
 
-            
+            if (isMailExist(user.Email) == false) return new ErrorResult("Mail adresi kullanılmış");
+            return new ErrorResult("Kullanıcı Eklenemedi Lütfen Değerleri kontrol Ediniz");
         }
 
         public IResult Update(User user)
@@ -44,10 +42,9 @@ namespace Business.Concrete
 
         public IResult Delete(int userId)
         {
-
             var result = _userDal.Get(user => user.UserId == userId);
             _userDal.Delete(result);
-            
+
             return new SuccessResult("Silindi");
         }
 
@@ -68,7 +65,12 @@ namespace Business.Concrete
             }
         }
 
-
-       
+        public bool isMailExist(string mail)
+        {
+            var result = _userDal.Get(user => mail == user.Email);
+            if (result == null)
+                return true;
+            return false;
+        }
     }
 }
