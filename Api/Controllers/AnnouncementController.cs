@@ -17,7 +17,7 @@ namespace Api.Controllers
             _announcementService = announcementService;
         }
 
-        [HttpPost("/Add")]
+        [HttpPost("/postAnnouncement")]
         public IResult Add(Announcement announcement)
         {
             return _announcementService.Add(announcement);
