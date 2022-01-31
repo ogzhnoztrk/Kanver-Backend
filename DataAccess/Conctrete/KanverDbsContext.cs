@@ -22,5 +22,6 @@ namespace DataAccess.Conctrete
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<Faq> Faq { get; set; }
         public DbSet<About> About { get; set; }
+        public DbSet<Contact> Contact { get; set; }
     }
 }
