@@ -21,8 +21,9 @@ namespace Business.Concrete
 
         public IResult Add(User user)
         {
-            //Mernis kontrolu sağlanır
-            if (_mernisServiceAdapter.VerifyCid(user).Result && isMailExist(user.Email)) //
+            //Mernis kontrolu sağlanır   
+            if (_mernisServiceAdapter.VerifyCid(user).Result && isMailExist(user.Email) && isIdentityExist(user.IdentityNumber))
+               
             {
                 user.IsMernisOk = true;
                 _userDal.Add(user);
@@ -30,6 +31,8 @@ namespace Business.Concrete
                 return new Result(true, "Eklendi");
             }
 
+            if (isIdentityExist(user.IdentityNumber) == false) return new ErrorResult("Bu Kimlik Numarası Kullanılmış");
+           
             if (isMailExist(user.Email) == false) return new ErrorResult("Mail adresi kullanılmış");
             return new ErrorResult("Kullanıcı Eklenemedi Lütfen Değerleri kontrol Ediniz");
         }
@@ -65,9 +68,17 @@ namespace Business.Concrete
             }
         }
 
-        public bool isMailExist(string mail)
+        private bool isMailExist(string mail)
         {
             var result = _userDal.Get(user => mail == user.Email);
+            if (result == null)
+                return true;
+            return false;
+        }
+
+        private bool isIdentityExist(string identitynumber)
+        {
+            var result = _userDal.Get(user => identitynumber == user.IdentityNumber);
             if (result == null)
                 return true;
             return false;
