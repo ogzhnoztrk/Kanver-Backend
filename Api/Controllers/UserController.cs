@@ -50,5 +50,12 @@ namespace Api.Controllers
         {
             return _userService.Login(mail, password);
         }
+        
+        
+        [HttpGet("/getUserByEmail")]
+        public IResult GetUserByEmail(string mail)
+        {
+            return _userService.GetUserByEmail(mail);
+        }
     }
 }
