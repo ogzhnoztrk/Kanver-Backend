@@ -43,6 +43,10 @@ namespace Api
             services.AddSingleton<IAboutDal, EfAboutDal>();
             services.AddSingleton<IAboutService, AboutMan>();
 
+            //CONTACT
+            services.AddSingleton<IContactDal, EfContactDal>();
+            services.AddSingleton<IContactService, ContactMan>();
+
             //FAQ
             services.AddSingleton<IFaqDal, EfFaqDal>();
             services.AddSingleton<IFaqService, FaqMan>();
