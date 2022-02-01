@@ -63,5 +63,11 @@ namespace Api.Controllers
         {
             return _userService.GetUserById(id);
         }
+
+        [HttpGet("/sendMail")]
+        public IResult SendMail(string email)
+        {
+            return _userService.SendMail(email);
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
 using Business.Abstract;
 using Business.Adapters.Abstract;
 using Core.Utilities.Results;
@@ -10,21 +9,24 @@ namespace Business.Concrete
 {
     public class UserMan : IUserService
     {
+        private readonly IMailService _mailService;
         private readonly IMernisServiceAdapter _mernisServiceAdapter;
         private readonly IUserDal _userDal;
 
-        public UserMan(IUserDal userDal, IMernisServiceAdapter mernisServiceAdapter)
+        public UserMan(IUserDal userDal, IMernisServiceAdapter mernisServiceAdapter, IMailService mailService)
         {
             _userDal = userDal;
             _mernisServiceAdapter = mernisServiceAdapter;
+            _mailService = mailService;
         }
 
 
         public IResult Add(User user)
         {
             //Mernis kontrolu sağlanır   
-            if (_mernisServiceAdapter.VerifyCid(user).Result && isMailExist(user.Email) && isIdentityExist(user.IdentityNumber))
-               
+            if (_mernisServiceAdapter.VerifyCid(user).Result && isMailExist(user.Email) &&
+                isIdentityExist(user.IdentityNumber))
+
             {
                 user.IsMernisOk = true;
                 _userDal.Add(user);
@@ -33,7 +35,7 @@ namespace Business.Concrete
             }
 
             if (isIdentityExist(user.IdentityNumber) == false) return new ErrorResult("Bu Kimlik Numarası Kullanılmış");
-           
+
             if (isMailExist(user.Email) == false) return new ErrorResult("Mail adresi kullanılmış");
             return new ErrorResult("Kullanıcı Eklenemedi Lütfen Değerleri kontrol Ediniz");
         }
@@ -73,19 +75,30 @@ namespace Business.Concrete
 
         {
             var result = _userDal.Get(user => email == user.Email);
-            if (result == null)
+            if (result == null) return new ErrorResult("data yok");
+
+            return new SuccessDataResult<string>(result.UserId.ToString(), "data getirildi");
+        }
+
+        public IResult SendMail(string email)
+        {
+            var result = _userDal.Get(user => email == user.Email);
+
+            
+
+            if (!isMailExist(result.Email))
             {
-                return new ErrorResult("data yok");
+                _mailService.SendMailForPassword(result);
+                return new SuccessResult("Mail Gönderildi");
             }
 
-            return new SuccessDataResult<string>(result.UserId.ToString(),"data getirildi");
-
+            return new ErrorResult("Mail Gönderilemedi");
         }
 
         public IResult GetUserById(int id)
         {
             var result = _userDal.Get(user => id == user.UserId);
-            return new DataResult<User>(result, true,"data geldi");
+            return new DataResult<User>(result, true, "data geldi");
         }
 
         private bool isMailExist(string mail)

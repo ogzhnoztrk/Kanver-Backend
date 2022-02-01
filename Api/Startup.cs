@@ -1,3 +1,5 @@
+using System.Net;
+using System.Net.Mail;
 using Business.Abstract;
 using Business.Adapters.Abstract;
 using Business.Adapters.Concrete;
@@ -27,6 +29,9 @@ namespace Api
         {
             services.AddCors();
             services.AddControllers();
+            
+            //
+            services.AddSingleton<IMailService, MailService>();
 
             //USER
             services.AddSingleton<IUserDal, EfUserDal>();
@@ -65,6 +70,7 @@ namespace Api
 
             //Service
             services.AddSingleton(typeof(IMernisServiceAdapter), typeof(MernisServiceAdapter));
+            //
 
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Api", Version = "v1"}); });
         }
