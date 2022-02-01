@@ -59,7 +59,7 @@ namespace Api.Controllers
         }
 
         [HttpGet("/getUserById")]
-        public IResult GetUserByEmail(int id)
+        public IResult GetUserId(int id)
         {
             return _userService.GetUserById(id);
         }

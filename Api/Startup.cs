@@ -59,6 +59,10 @@ namespace Api
             services.AddSingleton<IAnnouncementDal, EfAnnouncementDal>();
             services.AddSingleton<IAnnouncementService, AnnouncementMan>();
 
+            //CITY
+            services.AddSingleton<ICityDal, EfCityDal>();
+            services.AddSingleton<ICityService, CityMan>();
+
             //Service
             services.AddSingleton(typeof(IMernisServiceAdapter), typeof(MernisServiceAdapter));
 

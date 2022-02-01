@@ -10,7 +10,6 @@ namespace Entities.Concrete
         public int DonorId { get; set; } //Kullanıcı id'si one to many
         [ForeignKey("User")]public int UserId { get; set; }
         [Range(1,81)]public int CityId { get; set; }
-        public DateTime LastDonationDate { get; set; } //En son Kan verme tarihi
         [Column(TypeName = "TINYINT")] public bool DiseaseStatus { get; set; } //Hastalık bilgisi
         [Column(TypeName = "TINYINT")] public bool DrugStatus { get; set; } //Uyuşturucu bağımlılığı 
         [Column(TypeName = "TINYINT")] public bool AlcholStatus { get; set; } //Alkol Bağımlılığı

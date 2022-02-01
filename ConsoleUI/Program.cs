@@ -14,29 +14,17 @@ namespace ConsoleUI
     {
         private static void Main(string[] args)
         {
+            ICityDal city = new EfCityDal();
+            CityMan cityMan = new CityMan(city);
+
+            var cities = cityMan.getAll();
+
+            foreach (var a in cities.Data)
+            {
+                Console.WriteLine(a.CityName);
+            }
 
 
-            // User user = new User()
-            // {
-            //     IdentityNumber = "47018041374",
-            //     Name = "Oğuzhan",
-            //     LastName = "Öztürk",
-            //     BirthDay = new DateTime(2000,10,04)
-            // };
-            //
-            // MernisServiceAdapter adapter = new MernisServiceAdapter();
-            //
-            // Console.WriteLine(adapter.VerifyCid(user).Result);
-
-            //if (adapter.isRealPerson(user))
-            //{
-            //    Console.WriteLine("true");
-            //}
-            //else
-            //{
-            //    Console.WriteLine("False");
-            //
-            //}
         }
     }
 }
