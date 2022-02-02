@@ -22,6 +22,9 @@ namespace Business.Adapters.Concrete
             message.Subject = "Şifremi Unuttum";
             message.Body = "MEVCUT ŞİFRENİZ: " + user.Password;
             client.Send(message);
+
+
+            message.To.Clear();
         }
     }
 }
