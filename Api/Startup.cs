@@ -39,6 +39,7 @@ namespace Api
 
             //BLOODTYPE
             services.AddSingleton<IBloodTypeDal, EfBloodTypeDal>();
+            services.AddSingleton<IBloodTypeService, BloodTypeMan>();
 
             //COMPLAÝNT
             services.AddSingleton<IComplaintDal, EfComplaintDal>();
@@ -47,6 +48,8 @@ namespace Api
             //ABOUT
             services.AddSingleton<IAboutDal, EfAboutDal>();
             services.AddSingleton<IAboutService, AboutMan>();
+
+
 
             //CONTACT
             services.AddSingleton<IContactDal, EfContactDal>();

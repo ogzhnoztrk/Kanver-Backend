@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Business.Abstract;
 using Business.Adapters.Abstract;
 using Business.Adapters.Concrete;
 using Business.Concrete;
@@ -23,6 +24,7 @@ namespace ConsoleUI
             user.Email = "oguzhanoztrk00@gmail.com";
             user.Password = "asdasdasd";
 
+           
 
             //var result = service.SendMailForPassword(user);
             //Console.WriteLine(result);

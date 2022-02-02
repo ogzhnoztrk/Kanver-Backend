@@ -12,9 +12,10 @@ namespace Business.Concrete
         private readonly IMailService _mailService;
         private readonly IMernisServiceAdapter _mernisServiceAdapter;
         private readonly IUserDal _userDal;
-
+      
         public UserMan(IUserDal userDal, IMernisServiceAdapter mernisServiceAdapter, IMailService mailService)
         {
+           
             _userDal = userDal;
             _mernisServiceAdapter = mernisServiceAdapter;
             _mailService = mailService;
@@ -95,6 +96,9 @@ namespace Business.Concrete
             return new ErrorResult("Mail Gönderilemedi");
         }
 
+        
+
+
         public IResult GetUserById(int id)
         {
             var result = _userDal.Get(user => id == user.UserId);
@@ -116,5 +120,7 @@ namespace Business.Concrete
                 return true;
             return false;
         }
+
+        
     }
 }
