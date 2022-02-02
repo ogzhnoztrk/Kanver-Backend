@@ -23,5 +23,9 @@ namespace Business.Adapters.Concrete
             message.Body = "MEVCUT ŞİFRENİZ: " + user.Password;
             client.Send(message);
         }
+
+       
+
+        
     }
 }

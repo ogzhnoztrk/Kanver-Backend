@@ -13,6 +13,7 @@ namespace Business.Abstract
         IResult Login(string mail, string password);
         IResult GetUserByEmail(string email);
         IResult SendMail(string email);
+     
         IResult GetUserById(int id);
     }
 }
