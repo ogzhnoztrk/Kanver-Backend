@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Business.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -12,7 +8,7 @@ namespace Business.Concrete
 {
     public class AboutMan : IAboutService
     {
-        private IAboutDal _aboutDal;
+        private readonly IAboutDal _aboutDal;
 
         public AboutMan(IAboutDal aboutDal)
         {
@@ -38,4 +34,3 @@ namespace Business.Concrete
         }
     }
 }
-

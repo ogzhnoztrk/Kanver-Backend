@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Business.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -12,7 +8,7 @@ namespace Business.Concrete
 {
     public class ContactMan : IContactService
     {
-        private IContactDal _contactDal;
+        private readonly IContactDal _contactDal;
 
         public ContactMan(IContactDal contactDal)
         {

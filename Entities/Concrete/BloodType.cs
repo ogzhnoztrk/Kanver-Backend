@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Entities.Abstract;
+﻿using Entities.Abstract;
 
 namespace Entities.Concrete
 {
@@ -8,7 +7,5 @@ namespace Entities.Concrete
         public int BloodTypeId { get; set; }
 
         public string BloodTypeName { get; set; }
-
-
     }
 }

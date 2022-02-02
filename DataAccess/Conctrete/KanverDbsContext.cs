@@ -1,19 +1,10 @@
 ﻿using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Conctrete
 {
     public class KanverDbsContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=kanver;Trusted_Connection=true");
-        }
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<BloodType> BloodTypes { get; set; }
         public DbSet<City> Cities { get; set; }
@@ -23,5 +14,10 @@ namespace DataAccess.Conctrete
         public DbSet<Faq> Faq { get; set; }
         public DbSet<About> About { get; set; }
         public DbSet<Contact> Contact { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=kanver;Trusted_Connection=true");
+        }
     }
 }

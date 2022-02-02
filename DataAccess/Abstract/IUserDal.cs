@@ -1,16 +1,9 @@
-﻿
-
-using System;
-using System.Linq;
-using System.Linq.Expressions;
-using Core.DataAccess.Abstract;
-using DataAccess.Conctrete;
+﻿using Core.DataAccess.Abstract;
 using Entities.Concrete;
 
 namespace DataAccess.Abstract
 {
     public interface IUserDal : IEntityRepository<User>
     {
-      
     }
 }

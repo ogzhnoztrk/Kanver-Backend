@@ -12,6 +12,5 @@ namespace Business.Abstract
         IDataResult<List<Announcement>> GetAll();
         IDataResult<List<Announcement>> GetAllByBloodType(int bloodType);
         IDataResult<List<Announcement>> GetAllByCityId(int cityId);
-
     }
 }

@@ -1,12 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Business.Abstract;
 using Core.Utilities.Results;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
@@ -14,7 +10,7 @@ namespace Api.Controllers
     [ApiController]
     public class AboutController : ControllerBase
     {
-        private IAboutService _aboutService;
+        private readonly IAboutService _aboutService;
 
         public AboutController(IAboutService aboutService)
         {

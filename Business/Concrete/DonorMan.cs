@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Business.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -18,20 +17,16 @@ namespace Business.Concrete
 
         public IResult Add(Donor donor)
         {
-            if (donor.AlcholStatus && donor.DiseaseStatus && donor.DrugStatus && donor.MedicationStatus && isUserIdExist(donor.UserId))
+            if (donor.AlcholStatus && donor.DiseaseStatus && donor.DrugStatus && donor.MedicationStatus &&
+                isUserIdExist(donor.UserId))
             {
                 _donorDal.Add(donor);
                 return new SuccessResult("Donor Eklendi");
             }
-            else if(isUserIdExist(donor.UserId) == false)
-            {
-                return new ErrorResult(message: "Kullanıcı Zaten Donor");
-            }
-            else
-            {
-                return new ErrorResult(message: "Kullanıcının Değerleri Donor Olmayı Karşılamıyor");
-            }
-            
+
+            if (isUserIdExist(donor.UserId) == false)
+                return new ErrorResult("Kullanıcı Zaten Donor");
+            return new ErrorResult("Kullanıcının Değerleri Donor Olmayı Karşılamıyor");
         }
 
         public IResult Update(Donor donor)
@@ -60,15 +55,8 @@ namespace Business.Concrete
         private bool isUserIdExist(int userId)
         {
             var result = _donorDal.Get(donor => userId == donor.UserId);
-            if (result==null)
-            {
-                return true;
-            }
+            if (result == null) return true;
             return false;
-
         }
-        
-
-     
     }
 }

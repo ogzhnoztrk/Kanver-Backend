@@ -1,5 +1,3 @@
-using System.Net;
-using System.Net.Mail;
 using Business.Abstract;
 using Business.Adapters.Abstract;
 using Business.Adapters.Concrete;
@@ -29,7 +27,7 @@ namespace Api
         {
             services.AddCors();
             services.AddControllers();
-            
+
             //
             services.AddSingleton<IMailService, MailService>();
 
@@ -41,14 +39,13 @@ namespace Api
             services.AddSingleton<IBloodTypeDal, EfBloodTypeDal>();
             services.AddSingleton<IBloodTypeService, BloodTypeMan>();
 
-            //COMPLAÝNT
+            //COMPLAï¿½NT
             services.AddSingleton<IComplaintDal, EfComplaintDal>();
             services.AddSingleton<IComplaintService, ComplaintMan>();
 
             //ABOUT
             services.AddSingleton<IAboutDal, EfAboutDal>();
             services.AddSingleton<IAboutService, AboutMan>();
-
 
 
             //CONTACT

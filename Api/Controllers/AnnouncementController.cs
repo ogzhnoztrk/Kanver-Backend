@@ -46,6 +46,7 @@ namespace Api.Controllers
         {
             return _announcementService.GetAllByBloodType(bloodType);
         }
+
         [HttpGet("/getAllAnnouncementByCityId")]
         public IDataResult<List<Announcement>> GetAllByCityId(int cityId)
         {

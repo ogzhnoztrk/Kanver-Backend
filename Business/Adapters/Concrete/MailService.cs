@@ -25,9 +25,6 @@ namespace Business.Adapters.Concrete
 
 
             message.To.Clear();
-
-
-
         }
     }
 }

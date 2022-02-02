@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.InteropServices;
 using Entities.Abstract;
 
 namespace Entities.Concrete
@@ -14,10 +13,17 @@ namespace Entities.Concrete
         public string Name { get; set; }
         public string LastName { get; set; }
         [EmailAddress] public string Email { get; set; }
-        [DataType(DataType.PhoneNumber)]public string PhoneNumber { get; set; }
-        [DataType(DataType.Password)]public string Password { get; set; }
-        [Column(TypeName = "TINYINT")][DefaultValue(true)] public bool IsValidate { get; set; }
-        [Column(TypeName = "TINYINT")][DefaultValue(false)] public bool IsMernisOk { get; set; }
+        [DataType(DataType.PhoneNumber)] public string PhoneNumber { get; set; }
+        [DataType(DataType.Password)] public string Password { get; set; }
+
+        [Column(TypeName = "TINYINT")]
+        [DefaultValue(true)]
+        public bool IsValidate { get; set; }
+
+        [Column(TypeName = "TINYINT")]
+        [DefaultValue(false)]
+        public bool IsMernisOk { get; set; }
+
         [StringLength(11)] public string IdentityNumber { get; set; }
         public DateTime BirthDay { get; set; }
     }

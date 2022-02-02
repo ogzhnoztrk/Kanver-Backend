@@ -1,5 +1,4 @@
-﻿using System;
-using Entities.Abstract;
+﻿using Entities.Abstract;
 
 namespace Entities.Concrete
 {
@@ -7,7 +6,7 @@ namespace Entities.Concrete
     {
         public int AboutId { get; set; }
 
-        public string Head{ get; set; }
+        public string Head { get; set; }
         public string Content { get; set; }
     }
 }

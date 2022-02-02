@@ -1,5 +1,5 @@
-﻿using Entities.Abstract;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Entities.Abstract;
 
 namespace Entities.Concrete
 {
@@ -10,7 +10,5 @@ namespace Entities.Concrete
         public string ComplaintSubject { get; set; }
         [EmailAddress] public string Email { get; set; }
         public string FullName { get; set; }
-
-
     }
 }

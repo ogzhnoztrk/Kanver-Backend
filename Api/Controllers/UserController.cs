@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Business.Abstract;
 using Core.Utilities.Results;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Api.Controllers
 {
@@ -20,9 +17,9 @@ namespace Api.Controllers
             _userService = userService;
         }
 
-        
+
         [HttpPost("/postUser")]
-        public IResult Post([FromBody]User user)
+        public IResult Post([FromBody] User user)
         {
             return _userService.Add(user);
         }
@@ -50,8 +47,8 @@ namespace Api.Controllers
         {
             return _userService.Login(mail, password);
         }
-        
-        
+
+
         [HttpGet("/getUserByEmail")]
         public IResult GetUserByEmail(string mail)
         {
