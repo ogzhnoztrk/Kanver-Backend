@@ -24,6 +24,7 @@ namespace Business.Concrete
         public IResult Add(User user)
         {
             //Mernis kontrolu sağlanır   
+            //_mernisServiceAdapter.VerifyCid(user).Result &&
             if (_mernisServiceAdapter.VerifyCid(user).Result && isMailExist(user.Email) &&
                 isIdentityExist(user.IdentityNumber))
 
