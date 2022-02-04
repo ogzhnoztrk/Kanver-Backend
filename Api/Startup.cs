@@ -6,6 +6,7 @@ using DataAccess.Abstract;
 using DataAccess.Conctrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,7 +29,7 @@ namespace Api
             services.AddCors();
             services.AddControllers();
 
-            //
+            //Mail Service
             services.AddSingleton<IMailService, MailService>();
 
             //USER
@@ -68,10 +69,14 @@ namespace Api
             services.AddSingleton<ICityDal, EfCityDal>();
             services.AddSingleton<ICityService, CityMan>();
 
-            //Service
+            //Mernis Service
             services.AddSingleton(typeof(IMernisServiceAdapter), typeof(MernisServiceAdapter));
-            //
 
+            //Dbs
+            services.AddDbContext<KanverDbsContext>();
+            
+
+            
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Api", Version = "v1"}); });
         }
 
