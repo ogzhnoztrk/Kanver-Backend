@@ -19,5 +19,11 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<City>>(_cityDal.GetAll(), "getirildi");
         }
+
+        public IResult getCityNameById(int cityID)
+        {
+            var result = _cityDal.Get(c => cityID == c.CityId);
+            return new SuccessDataResult<City>(result,"Şehir Getirildi");
+        }
     }
 }

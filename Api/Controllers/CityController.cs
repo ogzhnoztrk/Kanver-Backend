@@ -22,5 +22,12 @@ namespace Api.Controllers
         {
             return _cityService.getAll();
         }
+
+        [HttpGet("/getCityNameById")]
+        public IResult getCityNameById(int cityID)
+        {
+
+            return _cityService.getCityNameById(cityID);
+        }
     }
 }

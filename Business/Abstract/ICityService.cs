@@ -7,5 +7,6 @@ namespace Business.Abstract
     public interface ICityService
     {
         IDataResult<List<City>> getAll();
+        IResult getCityNameById(int cityID);
     }
 }
