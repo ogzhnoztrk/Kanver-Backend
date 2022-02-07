@@ -17,7 +17,7 @@ namespace DataAccess.Conctrete
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("workstation id=KanverDbs.mssql.somee.com;packet size=4096;user id=ganxboy_SQLLogin_1;pwd=bhaelxywxr;data source=KanverDbs.mssql.somee.com;persist security info=False;initial catalog=KanverDbs");
+            optionsBuilder.UseSqlServer("workstation id=kanverdb.mssql.somee.com;packet size=4096;user id=gemi1234;pwd=!gemi123;data source=kanverdb.mssql.somee.com;persist security info=False;initial catalog=kanverdb");
         }
     }
 }
