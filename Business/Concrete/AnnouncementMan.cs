@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Business.Abstract;
+using Business.Adapters.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -9,16 +10,22 @@ namespace Business.Concrete
     public class AnnouncementMan : IAnnouncementService
     {
         private readonly IAnnouncementDal _announcementDal;
-
-        public AnnouncementMan(IAnnouncementDal announcementDal)
+        private ISmsService _smsService;
+        private IUserDal _userDal;
+        public AnnouncementMan(IAnnouncementDal announcementDal, ISmsService smsService, IUserDal userDal)
         {
             _announcementDal = announcementDal;
+            _smsService = smsService;
+            _userDal = userDal;
+
         }
 
 
         public IResult Add(Announcement announcement)
         {
+
             _announcementDal.Add(announcement);
+            SendSmsSameBloods(announcement.BloodTypeId);
             return new SuccessResult("Eklendi");
         }
 
@@ -50,5 +57,16 @@ namespace Business.Concrete
             var result = _announcementDal.GetAllByFilter(a => a.CityId == cityId);
             return new SuccessDataResult<List<Announcement>>(result, "Data Getirldi");
         }
+
+        private void SendSmsSameBloods(int announcementBloodId)
+        {
+            var result = _userDal.GetAllByFilter(user => announcementBloodId == user.BloodTypeId);
+            foreach (var res in result)
+            {
+                _smsService.SendSms(res.PhoneNumber);
+            }
+
+        }
+        
     }
 }

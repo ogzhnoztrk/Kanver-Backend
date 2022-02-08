@@ -26,7 +26,7 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
+            services.AddCors();   
             services.AddControllers();
 
             //Mail Service
@@ -74,6 +74,9 @@ namespace Api
 
             //Dbs
             services.AddDbContext<KanverDbsContext>();
+
+            //SmsService
+            services.AddSingleton(typeof(ISmsService), typeof(SmsService));
             
 
             
@@ -90,8 +93,8 @@ namespace Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api v1"));
             }
 
-            app.UseCors(builder => builder.WithOrigins("http://kanver.somee.com/").AllowAnyHeader());
-            app.UseCors(builder => builder.WithOrigins("http://kanver.somee.com/").AllowAnyHeader());
+            app.UseCors(c => c.WithOrigins("http://kanver.somee.com/#/").AllowAnyHeader());
+            
 
             app.UseHttpsRedirection();
 

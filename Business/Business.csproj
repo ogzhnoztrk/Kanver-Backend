@@ -24,6 +24,7 @@
     <PackageReference Include="System.ServiceModel.Http" Version="4.8.*" />
     <PackageReference Include="System.ServiceModel.NetTcp" Version="4.8.*" />
     <PackageReference Include="System.ServiceModel.Security" Version="4.8.*" />
+    <PackageReference Include="Twilio" Version="5.70.1" />
   </ItemGroup>
 
   <ItemGroup>
