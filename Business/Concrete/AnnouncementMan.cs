@@ -12,11 +12,13 @@ namespace Business.Concrete
         private readonly IAnnouncementDal _announcementDal;
         private ISmsService _smsService;
         private IUserDal _userDal;
-        public AnnouncementMan(IAnnouncementDal announcementDal, ISmsService smsService, IUserDal userDal)
+        private IMailService _mailService;
+        public AnnouncementMan(IAnnouncementDal announcementDal, ISmsService smsService, IUserDal userDal, IMailService mailService)
         {
             _announcementDal = announcementDal;
             _smsService = smsService;
             _userDal = userDal;
+            _mailService = mailService;
 
         }
 
@@ -26,19 +28,20 @@ namespace Business.Concrete
 
             _announcementDal.Add(announcement);
             SendSmsSameBloods(announcement.BloodTypeId);
+            SendMailSameBloods(announcement.BloodTypeId);
             return new SuccessResult("Eklendi");
         }
 
         public IResult Delete(Announcement announcement)
         {
             _announcementDal.Delete(announcement);
-            return new SuccessResult("Eklendi");
+            return new SuccessResult("Silindi");
         }
 
         public IResult Update(Announcement announcement)
         {
             _announcementDal.Update(announcement);
-            return new SuccessResult("Eklendi");
+            return new SuccessResult("Güncellendi");
         }
 
         public IDataResult<List<Announcement>> GetAll()
@@ -67,6 +70,14 @@ namespace Business.Concrete
             }
 
         }
-        
+        private void SendMailSameBloods(int announcementBloodId)
+        {
+            var result = _userDal.GetAllByFilter(user => announcementBloodId == user.BloodTypeId);
+            foreach (var res in result)
+            {
+                _mailService.SendMailForAnnouncements(res.Email);
+            }
+
+        }
     }
 }

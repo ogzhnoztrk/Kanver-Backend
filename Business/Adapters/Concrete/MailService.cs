@@ -12,6 +12,21 @@ namespace Business.Adapters.Concrete
         private readonly SmtpClient client = new("smtp.gmail.com", 587);
         private readonly MailMessage message = new();
 
+        public void SendMailForAnnouncements(string mail)
+        {
+            client.Credentials = new NetworkCredential(Email, Password);
+            client.EnableSsl = true;
+
+            message.To.Add(mail);
+            message.From = new MailAddress("kanverdeneme@gmail.com");
+            message.Subject = "İlan Eklendi";
+            message.Body = "Kan grubunuzla uyuşan bir ilan eklendi";
+            client.Send(message);
+
+
+            message.To.Clear();
+        }
+
         public void SendMailForPassword(User user)
         {
             client.Credentials = new NetworkCredential(Email, Password);
