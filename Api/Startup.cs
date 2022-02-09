@@ -25,6 +25,7 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddControllers();
 
             //Mail Service
@@ -90,6 +91,8 @@ namespace Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api v1"));
             }
 
+            // app.UseCors(c => c.AllowAnyHeader().WithOrigins("http://kanver.somee.com"));
+            app.UseCors(c => c.WithOrigins("http://kanver.somee.com").AllowAnyHeader());
 
             app.UseHttpsRedirection();
 
