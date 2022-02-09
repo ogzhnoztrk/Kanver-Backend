@@ -1,7 +1,5 @@
 ﻿using Business.Adapters.Abstract;
 using Business.Adapters.Concrete;
-using Entities.Concrete;
-using System;
 
 namespace ConsoleUI
 {
@@ -9,9 +7,8 @@ namespace ConsoleUI
     {
         public static void Main(string[] args)
         {
-           
+            ISmsService service = new SmsService();
+            service.SendSms("+905312939472");
         }
-
-       
     }
 }

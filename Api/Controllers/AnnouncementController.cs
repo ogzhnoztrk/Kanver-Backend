@@ -2,7 +2,6 @@
 using Business.Abstract;
 using Core.Utilities.Results;
 using Entities.Concrete;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -18,7 +17,7 @@ namespace Api.Controllers
             _announcementService = announcementService;
         }
 
-        
+
         [HttpPost("/postAnnouncement")]
         public IResult Add(Announcement announcement)
         {

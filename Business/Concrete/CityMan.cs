@@ -23,7 +23,7 @@ namespace Business.Concrete
         public IResult getCityNameById(int cityID)
         {
             var result = _cityDal.Get(c => cityID == c.CityId);
-            return new SuccessDataResult<City>(result,"Şehir Getirildi");
+            return new SuccessDataResult<City>(result, "Şehir Getirildi");
         }
     }
 }

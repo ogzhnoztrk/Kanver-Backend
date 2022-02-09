@@ -26,7 +26,6 @@ namespace Api.Controllers
         [HttpGet("/getCityNameById")]
         public IResult getCityNameById(int cityID)
         {
-
             return _cityService.getCityNameById(cityID);
         }
     }

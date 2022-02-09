@@ -10,25 +10,26 @@ namespace Business.Concrete
     public class AnnouncementMan : IAnnouncementService
     {
         private readonly IAnnouncementDal _announcementDal;
-        private ISmsService _smsService;
-        private IUserDal _userDal;
-        private IMailService _mailService;
-        public AnnouncementMan(IAnnouncementDal announcementDal, ISmsService smsService, IUserDal userDal, IMailService mailService)
+        private readonly IMailService _mailService;
+        private readonly ISmsService _smsService;
+        private readonly IUserDal _userDal;
+
+        public AnnouncementMan(IAnnouncementDal announcementDal, ISmsService smsService, IUserDal userDal,
+            IMailService mailService)
         {
             _announcementDal = announcementDal;
             _smsService = smsService;
             _userDal = userDal;
             _mailService = mailService;
-
         }
 
 
         public IResult Add(Announcement announcement)
         {
-
-            _announcementDal.Add(announcement);
             SendSmsSameBloods(announcement.BloodTypeId);
             SendMailSameBloods(announcement.BloodTypeId);
+            _announcementDal.Add(announcement);
+
             return new SuccessResult("Eklendi");
         }
 
@@ -64,20 +65,13 @@ namespace Business.Concrete
         private void SendSmsSameBloods(int announcementBloodId)
         {
             var result = _userDal.GetAllByFilter(user => announcementBloodId == user.BloodTypeId);
-            foreach (var res in result)
-            {
-                _smsService.SendSms(res.PhoneNumber);
-            }
-
+            foreach (var res in result) _smsService.SendSms(res.PhoneNumber);
         }
+
         private void SendMailSameBloods(int announcementBloodId)
         {
             var result = _userDal.GetAllByFilter(user => announcementBloodId == user.BloodTypeId);
-            foreach (var res in result)
-            {
-                _mailService.SendMailForAnnouncements(res.Email);
-            }
-
+            foreach (var res in result) _mailService.SendMailForAnnouncements(res.Email);
         }
     }
 }
